@@ -1,0 +1,391 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.1 (Debian 11.1-2)
+-- Dumped by pg_dump version 11.1 (Debian 11.1-2)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: Almacen_de_Materia_Prima; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Almacen_de_Materia_Prima" (
+    amp_id integer NOT NULL,
+    "Fecha" date,
+    "Cantidad" integer,
+    lote_id integer
+);
+
+
+ALTER TABLE public."Almacen_de_Materia_Prima" OWNER TO postgres;
+
+--
+-- Name: Almacen_de_botellas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Almacen_de_botellas" (
+    almb_id integer NOT NULL,
+    "Fecha" date,
+    "Cantidad" integer,
+    ap_id integer,
+    cvza_id integer
+);
+
+
+ALTER TABLE public."Almacen_de_botellas" OWNER TO postgres;
+
+--
+-- Name: Almacen_produccion; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Almacen_produccion" (
+    ap_id integer NOT NULL,
+    "Fecha" date,
+    "Cantidad" integer,
+    amp_id integer
+);
+
+
+ALTER TABLE public."Almacen_produccion" OWNER TO postgres;
+
+--
+-- Name: Cerveza; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Cerveza" (
+    cvza_id integer NOT NULL,
+    "Tipo" character varying(60),
+    "Presentacion" integer,
+    "Precio" money
+);
+
+
+ALTER TABLE public."Cerveza" OWNER TO postgres;
+
+--
+-- Name: Lote; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Lote" (
+    lote_id integer NOT NULL,
+    pvd_id integer,
+    "Peso" double precision,
+    "Tipo" character varying(60),
+    "Estado" integer
+);
+
+
+ALTER TABLE public."Lote" OWNER TO postgres;
+
+--
+-- Name: Proveedores; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Proveedores" (
+    pvd_id integer NOT NULL,
+    "Nombre" character varying(60),
+    "Apellido" character varying(60)
+);
+
+
+ALTER TABLE public."Proveedores" OWNER TO postgres;
+
+--
+-- Name: Supermercados; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Supermercados" (
+    s_id integer NOT NULL,
+    "Nombre" character varying(60),
+    vend_id integer
+);
+
+
+ALTER TABLE public."Supermercados" OWNER TO postgres;
+
+--
+-- Name: Vendedores; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Vendedores" (
+    vend_id integer NOT NULL,
+    "Nombre" character varying(60),
+    "Apellido" character varying(60),
+    almb_id integer
+);
+
+
+ALTER TABLE public."Vendedores" OWNER TO postgres;
+
+--
+-- Name: jaimico; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.jaimico (
+    jaimico_id integer NOT NULL,
+    peso integer,
+    tipo character varying(60)
+);
+
+
+ALTER TABLE public.jaimico OWNER TO postgres;
+
+--
+-- Name: lote; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.lote (
+    lote_id integer NOT NULL,
+    pvd_id integer,
+    "Peso" double precision,
+    "Tipo" character varying(60),
+    "Estado" integer
+);
+
+
+ALTER TABLE public.lote OWNER TO postgres;
+
+--
+-- Data for Name: Almacen_de_Materia_Prima; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Almacen_de_Materia_Prima" (amp_id, "Fecha", "Cantidad", lote_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Almacen_de_botellas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Almacen_de_botellas" (almb_id, "Fecha", "Cantidad", ap_id, cvza_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Almacen_produccion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Almacen_produccion" (ap_id, "Fecha", "Cantidad", amp_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Cerveza; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Cerveza" (cvza_id, "Tipo", "Presentacion", "Precio") FROM stdin;
+\.
+
+
+--
+-- Data for Name: Lote; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Lote" (lote_id, pvd_id, "Peso", "Tipo", "Estado") FROM stdin;
+\.
+
+
+--
+-- Data for Name: Proveedores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Proveedores" (pvd_id, "Nombre", "Apellido") FROM stdin;
+\.
+
+
+--
+-- Data for Name: Supermercados; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Supermercados" (s_id, "Nombre", vend_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Vendedores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Vendedores" (vend_id, "Nombre", "Apellido", almb_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: jaimico; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.jaimico (jaimico_id, peso, tipo) FROM stdin;
+10	15	negra
+11	17	negra
+\.
+
+
+--
+-- Data for Name: lote; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.lote (lote_id, pvd_id, "Peso", "Tipo", "Estado") FROM stdin;
+\.
+
+
+--
+-- Name: Almacen_de_Materia_Prima Almacen_de_Materia_Prima_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Almacen_de_Materia_Prima"
+    ADD CONSTRAINT "Almacen_de_Materia_Prima_pkey" PRIMARY KEY (amp_id);
+
+
+--
+-- Name: Almacen_de_botellas Almacen_de_botellas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Almacen_de_botellas"
+    ADD CONSTRAINT "Almacen_de_botellas_pkey" PRIMARY KEY (almb_id);
+
+
+--
+-- Name: Almacen_produccion Almacen_produccion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Almacen_produccion"
+    ADD CONSTRAINT "Almacen_produccion_pkey" PRIMARY KEY (ap_id);
+
+
+--
+-- Name: Cerveza Cerveza_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Cerveza"
+    ADD CONSTRAINT "Cerveza_pkey" PRIMARY KEY (cvza_id);
+
+
+--
+-- Name: Lote Lote_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Lote"
+    ADD CONSTRAINT "Lote_pkey" PRIMARY KEY (lote_id);
+
+
+--
+-- Name: Proveedores Proveedores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Proveedores"
+    ADD CONSTRAINT "Proveedores_pkey" PRIMARY KEY (pvd_id);
+
+
+--
+-- Name: Supermercados Supermercados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Supermercados"
+    ADD CONSTRAINT "Supermercados_pkey" PRIMARY KEY (s_id);
+
+
+--
+-- Name: Vendedores Vendedores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Vendedores"
+    ADD CONSTRAINT "Vendedores_pkey" PRIMARY KEY (vend_id);
+
+
+--
+-- Name: jaimico jaimico_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.jaimico
+    ADD CONSTRAINT jaimico_pkey PRIMARY KEY (jaimico_id);
+
+
+--
+-- Name: lote lote_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.lote
+    ADD CONSTRAINT lote_pkey PRIMARY KEY (lote_id);
+
+
+--
+-- Name: Almacen_de_Materia_Prima Almacen_de_Materia_Prima_lote_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Almacen_de_Materia_Prima"
+    ADD CONSTRAINT "Almacen_de_Materia_Prima_lote_id_fkey" FOREIGN KEY (lote_id) REFERENCES public."Lote"(lote_id);
+
+
+--
+-- Name: Almacen_de_botellas Almacen_de_botellas_ap_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Almacen_de_botellas"
+    ADD CONSTRAINT "Almacen_de_botellas_ap_id_fkey" FOREIGN KEY (ap_id) REFERENCES public."Almacen_produccion"(ap_id);
+
+
+--
+-- Name: Almacen_de_botellas Almacen_de_botellas_cvza_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Almacen_de_botellas"
+    ADD CONSTRAINT "Almacen_de_botellas_cvza_id_fkey" FOREIGN KEY (cvza_id) REFERENCES public."Cerveza"(cvza_id);
+
+
+--
+-- Name: Almacen_produccion Almacen_produccion_amp_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Almacen_produccion"
+    ADD CONSTRAINT "Almacen_produccion_amp_id_fkey" FOREIGN KEY (amp_id) REFERENCES public."Almacen_de_Materia_Prima"(amp_id);
+
+
+--
+-- Name: Lote Lote_pvd_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Lote"
+    ADD CONSTRAINT "Lote_pvd_id_fkey" FOREIGN KEY (pvd_id) REFERENCES public."Proveedores"(pvd_id);
+
+
+--
+-- Name: Supermercados Supermercados_vend_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Supermercados"
+    ADD CONSTRAINT "Supermercados_vend_id_fkey" FOREIGN KEY (vend_id) REFERENCES public."Vendedores"(vend_id);
+
+
+--
+-- Name: Vendedores Vendedores_almb_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Vendedores"
+    ADD CONSTRAINT "Vendedores_almb_id_fkey" FOREIGN KEY (almb_id) REFERENCES public."Almacen_de_botellas"(almb_id);
+
+
+--
+-- Name: lote lote_pvd_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.lote
+    ADD CONSTRAINT lote_pvd_id_fkey FOREIGN KEY (pvd_id) REFERENCES public."Proveedores"(pvd_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
