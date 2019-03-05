@@ -10,6 +10,6 @@ Laboratorio 3 de Administración de Bases de datos - Scripts para Respaldo y Res
 * Store.sql es el modelo de la base de datos realizado en  Power SQL Data Architect
 - Los otros scripts los encontre y algunos tienen funcionabilidades curiosas y comodas, sobre todo en casos dondes las bases de datos son muy grandes y no pueden caber en memoria.
 
-#Autor
+# Autor
 *Samuel Ignacio Carmona
 
